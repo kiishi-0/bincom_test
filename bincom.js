@@ -22,6 +22,15 @@ con.connect((err)=>{
 })
 
 
+app.get("/", (req, res)=>{
+  con.query("select * from polling_unit", function(err, result,fields){
+      if(err){
+          console.log(err)
+      }else{
+        res.send('Hello World')
+      }
+  })
+})
 app.get("/poll_unit", (req, res)=>{
   con.query("select * from polling_unit", function(err, result,fields){
       if(err){
