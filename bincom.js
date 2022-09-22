@@ -1,5 +1,3 @@
-
-
 const express = require("express");
 const app = express();
 const mysql = require("mysql")
@@ -69,7 +67,9 @@ app.get("/polling_results", (req, res)=>{
   })
 })
 
-app.listen(port)
+app.listen(port, ()=>{
+  console.log(port)
+})
 
 
 
