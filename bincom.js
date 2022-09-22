@@ -3,6 +3,7 @@
 const express = require("express");
 const app = express();
 const mysql = require("mysql")
+let port = process.env.PORT || 3000
 
 
 const con = mysql.createConnection({
@@ -68,7 +69,7 @@ app.get("/polling_results", (req, res)=>{
   })
 })
 
-app.listen(3000)
+app.listen(port)
 
 
 
