@@ -1,76 +1,28 @@
 const express = require("express");
 const app = express();
-const mysql = require("mysql")
+const cors = require('cors')
+// const mysql = require("mysql")
 let port = process.env.PORT || 3000
 
+app.use(cors())
 
-const con = mysql.createConnection({
-  host: 'sql10.freemysqlhosting.net',
-  user: 'sql10521412',
-  password: 'DzDM7mcT1u',
-  database: 'sql10521412',
-  port: 3306
+app.get('/', (req, res) =>{
+  res.json([
+    {
+      "id": "1",
+      "title":"Book Review: The bear and the nightingale"
+    },
+    {
+      "id": "2",
+      "title":"Game Review: Pokemon brilliant diamond"
+    },
+    {
+      "id": "3",
+      "title":"Show Review: Alice in Borderland"
+    },
+  ])
 })
 
-con.connect((err)=>{
-  if(err){
-      console.log(err)
-  }else{
-      console.log("CONNECTED !!")
-  }
+app.listen(port, () =>{
+  console.log(`listening for requests on port ${port}`)
 })
-
-
-app.get("/", (req, res)=>{
-  con.query("select * from polling_unit", function(err, result,fields){
-      if(err){
-          console.log(err)
-      }else{
-        res.send('Hello World')
-      }
-  })
-})
-app.get("/poll_unit", (req, res)=>{
-  con.query("select * from polling_unit", function(err, result,fields){
-      if(err){
-          console.log(err)
-      }else{
-        res.json(result)
-      }
-  })
-})
-app.get("/ward", (req, res)=>{
-  con.query("select * from ward", function(err, result,fields){
-      if(err){
-          console.log(err)
-      }else{
-        res.json(result)
-      }
-  })
-})
-app.get("/lga", (req, res)=>{
-  con.query("select * from lga", function(err, result,fields){
-      if(err){
-          console.log(err)
-      }else{
-        res.json(result)
-      }
-  })
-})
-app.get("/polling_results", (req, res)=>{
-  con.query("select * from announced_pu_results", function(err, result,fields){
-      if(err){
-          console.log(err)
-      }else{
-        res.json(result)
-      }
-  })
-})
-
-app.listen(port, ()=>{
-  console.log(port)
-})
-
-
-
-
